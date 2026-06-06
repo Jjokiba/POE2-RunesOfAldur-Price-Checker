@@ -56,8 +56,9 @@ def search_item(item_name: str) -> list[str]:
     
     if r.status_code != 200:
         print(f"Error {r.status_code}: {r.text}")
+        print("/n teste")
         print(f"{r.text[:1000]}")
-        st.console(f"Error {r.status_code}: {r.text[:1000]}", color="red")
+        # st.console(f"Error {r.status_code}: {r.text[:1000]}", color="red")
     
     st.write(f"Error {r.status_code}: {r.text[:1000]}")
     st.write(f"tset")
