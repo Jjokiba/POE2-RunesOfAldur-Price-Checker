@@ -23,7 +23,7 @@ def search_item(item_name: str) -> list[str]:
     POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
     HEADERS = get_headers()
     st.write("Secret:", POESESSID is not None)
-    st.write("Secret:", HEADERS)
+    
     url = f"https://www.pathofexile.com/api/trade2/search/poe2/{LEAGUE}"
     query = {
         "query": {
