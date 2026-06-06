@@ -17,7 +17,6 @@ def get_headers():
         "Content-Type": "application/json",
     }
 
-
 def search_item(item_name: str) -> list[str]:
     """Returns a list of listing IDs for a given item name."""
     POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
@@ -56,12 +55,7 @@ def search_item(item_name: str) -> list[str]:
     
     if r.status_code != 200:
         print(f"Error {r.status_code}: {r.text}")
-        print("/n teste")
-        print(f"{r.text[:1000]}")
-        # st.console(f"Error {r.status_code}: {r.text[:1000]}", color="red")
     
-    st.write(f"Error {r.status_code}: {r.text[:1000]}")
-    st.write(f"tset")
     r.raise_for_status()
 
     return r.json().get("result", [])[:1]   # top 1 listings
@@ -92,7 +86,6 @@ def get_price(item_name: str) -> str:
     currency  = price_info.get("currency", "?")
 
     return f"{amount} {currency}"
-
 
 def get_item_data(item_name: str) -> dict:
     """Returns item data including price and currency icon URL from POE2 Wiki."""
@@ -192,5 +185,3 @@ def get_item_data(item_name: str) -> dict:
         "quantity": quantity,
         "item_icon": item_icon
     }
-
-
