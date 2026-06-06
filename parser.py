@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def parse_items(raw_text: str) -> list[str]:
     lines = raw_text.splitlines()
     items = []
@@ -8,8 +7,7 @@ def parse_items(raw_text: str) -> list[str]:
     for line in lines:
         cleaned = line.strip()
         if cleaned:                    # skip blank lines
-            items.append(cleaned)
-            st.info(f"Parsed item: {cleaned}")  # Debug: show each parsed item
+            items.append(cleaned)   
 
     items = [
         item
@@ -22,9 +20,12 @@ def parse_items(raw_text: str) -> list[str]:
         )
     ]
     items = [
-        item.replace("Ix ", "").replace("1x ", "").replace("1X ", "").replace("IX ", "").strip()
+        item.lower().replace("ix ", "").replace("1x ", "").replace("support:", "").replace("skill:", "").strip().title()
         for item in items
     ]
+
+    for item in items:
+        st.info(f"Parsed item: {item}") 
 
     return items
 

@@ -113,6 +113,7 @@ def get_item_data(item_name: str) -> dict:
         "chance": "Orb of Chance",
         "fusing": "Orb of Fusing",
         "alchemy": "Orb of Alchemy",
+        "alch": "Orb of Alchemy",
         "binding": "Orb of Binding",
         "annulment": "Orb of Annulment",
         "chromatic": "Chromatic Orb",
@@ -130,7 +131,9 @@ def get_item_data(item_name: str) -> dict:
         "exalted or divine": "Exalted or Divine Orbs",
         # Full names (in case API returns full name) - all lowercase
         "orb of augmentation": "Orb of Augmentation",
+        "aug": "Orb of Augmentation",
         "orb of alteration": "Orb of Alteration",
+        "alt": "Orb of Alteration",
         "orb of transmutation": "Orb of Transmutation",
         "orb of chance": "Orb of Chance",
         "orb of fusing": "Orb of Fusing",
