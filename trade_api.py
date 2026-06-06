@@ -2,23 +2,27 @@ import requests, os, json
 from dotenv import load_dotenv
 import streamlit as st
 
-load_dotenv()
-POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
-st.write("Secret:", POESESSID is not None)
+POESESSID: str | None = "";
 LEAGUE    = "Runes%20of%20Aldur"   
-HEADERS   = {
-    "Cookie": f"POESESSID={POESESSID}",
-    "User-Agent": f"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Accept": "application/json",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Referer": "https://www.pathofexile.com/trade2/search/poe2",
-    "Content-Type": "application/json",
-}
+HEADERS   = "";
+
+load_dotenv()
+def define_headers():
+    POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
+    st.write("Secret:", POESESSID is not None)
+    LEAGUE    = "Runes%20of%20Aldur"   
+    HEADERS   = {
+        "Cookie": f"POESESSID={POESESSID}",
+        "User-Agent": f"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "application/json",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://www.pathofexile.com/trade2/search/poe2",
+        "Content-Type": "application/json",
+    }
 
 def search_item(item_name: str) -> list[str]:
     """Returns a list of listing IDs for a given item name."""
-    POESESSID = st.secrets.get("POESESSID")
-    st.write("Secret:", POESESSID is not None)
+    st.write("Secret:", POESESSID is not "")
     url = f"https://www.pathofexile.com/api/trade2/search/poe2/{LEAGUE}"
     query = {
         "query": {
