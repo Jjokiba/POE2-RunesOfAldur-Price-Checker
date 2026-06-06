@@ -1,4 +1,7 @@
-# 💰 Path of Exile 2 - Auto search Value
+<h1>
+  <img src="resource/poe2.ico" height="40" valign="middle">
+  Path of Exile 2 - Auto Search Value
+</h1>
 
 This is an script in python made to read an Image you send in Input Folder and then consult each Item value.
 Made to better evaluate all the Runeshape Valuations in the Runes of Aldur league mechanic to optmize your selection without need to consult each Item in the market.
