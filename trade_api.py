@@ -166,14 +166,16 @@ def get_item_data(item_name: str) -> dict:
     else:
         currency_icon = None
     
-    # Get item quantity
+    # Get item data (quantity and icon)
     item = listing.get("item", {})
     quantity = item.get("stackSize", 1)
+    item_icon = item.get("icon", None)
     
     return {
         "price": price,
         "currency_icon": currency_icon,
-        "quantity": quantity
+        "quantity": quantity,
+        "item_icon": item_icon
     }
 
 

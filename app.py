@@ -1,3 +1,5 @@
+import base64
+
 import streamlit as st
 import time
 import tempfile
@@ -12,13 +14,22 @@ from output import print_results
 # Set page config
 st.set_page_config(
     page_title="POE2 Auto Search Value",
-    page_icon="💰",
+    page_icon="resource/poe2.ico",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# Title and description
-st.title("💰 POE2 Auto Search Value")
+with open("./resource/poe2.ico", "rb") as f:
+    img_base64 = base64.b64encode(f.read()).decode()
+
+st.html(f"""
+<div style="display:flex;">
+    <img src="data:image/x-icon;base64,{img_base64}"
+         style="width:64px;height:60px;margin-right:4px;align-content: center;font-size: xx-large;"
+         title="Item Icon">
+    <h2 style="margin:0;">POE2 Auto Search Value</h2>
+</div>
+""")
 st.markdown("""
 This tool helps you quickly evaluate Runeshape valuations in the **Runes of Aldur** league.
 Simply upload a screenshot of your items and get their market prices instantly!
@@ -73,6 +84,7 @@ if uploaded_file is not None:
                 prices = []
                 currency_icons = []
                 quantities = []
+                item_icons = []
                 with right_col:
                     progress_bar = st.progress(0)
                     status_text = st.empty()
@@ -87,15 +99,18 @@ if uploaded_file is not None:
                             price = item_data["price"]
                             currency_icon = item_data["currency_icon"]
                             quantity = item_data["quantity"]
+                            item_icon = item_data["item_icon"]
                             
                             prices.append(price)
                             currency_icons.append(currency_icon)
                             quantities.append(quantity)
+                            item_icons.append(item_icon)
                             console_logs.append(f"✅ {item} | {price}")
                         except Exception as item_error:
                             prices.append("Error fetching")
                             currency_icons.append(None)
                             quantities.append(1)
+                            item_icons.append(None)
                             console_logs.append(f"❌ {item} | Error: {str(item_error)}")
                     
                     except Exception as loop_error:
@@ -104,6 +119,7 @@ if uploaded_file is not None:
                         prices.append("Unknown Error")
                         currency_icons.append(None)
                         quantities.append(1)
+                        item_icons.append(None)
                     
                     finally:
                         # Update console in real-time
@@ -127,7 +143,8 @@ if uploaded_file is not None:
                         "Item": items,
                         "Price": prices,
                         "CurrencyIcon": currency_icons,
-                        "Quantity": quantities
+                        "Quantity": quantities,
+                        "ItemIcon": item_icons
                     })
                     
                     # Sort by price (attempt to extract number for sorting)
@@ -148,13 +165,17 @@ if uploaded_file is not None:
                         price = row["Price"]
                         currency_icon = row["CurrencyIcon"]
                         quantity = row["Quantity"]
+                        item_icon = row["ItemIcon"]
                         
-                        # Build item display with quantity x item_name
-                        item_display = f'{quantity}x {item_name}'
+                        # Build item display with quantity x item_icon item_name
+                        if item_icon:
+                            item_display = f'{quantity}x <img src="{item_icon}" style="width: 24px; height: 24px; margin-right: 4px; vertical-align: middle;" title="Item Icon"> {item_name}'
+                        else:
+                            item_display = f'{quantity}x {item_name}'
                         
                         # Build price display with currency icon
                         if currency_icon:
-                            price_display = f'<img src="{currency_icon}" style="width: 24px; height: 24px; margin-right: 4px; vertical-align: middle;" title="Price"> {price}'
+                            price_display = f'{price.split()[0]} <img src="{currency_icon}" style="width: 16px; height: 16px; vertical-align: middle;" title="Currency Icon"> {price.split()[1]}'
                         else:
                             price_display = price
                         
