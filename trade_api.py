@@ -1,12 +1,10 @@
 import requests, os, json
-from dotenv import load_dotenv
 import streamlit as st
 
 LEAGUE    = "Runes%20of%20Aldur"   
     
 def get_headers():
-    load_dotenv()
-    POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
+    POESESSID = st.secrets.get("POESESSID")
 
     return {
         "Cookie": f"POESESSID={POESESSID}",

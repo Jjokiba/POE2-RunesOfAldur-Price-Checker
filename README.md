@@ -3,7 +3,7 @@
 This is an script in python made to read an Image you send in Input Folder and then consult each Item value.
 Made to better evaluate all the Runeshape Valuations in the Runes of Aldur league mechanic to optmize your selection without need to consult each Item in the market.
 
-<img style="border-radius:50px;" src="resource/example.png">
+<img style="border-radius:50px;" src="resource/example-V2.png">
 
 
 ## ⚙️ How to Run It?
@@ -13,22 +13,36 @@ Made to better evaluate all the Runeshape Valuations in the Runes of Aldur leagu
 First access GGG poe Trade site and authenticate your account:
 https://www.pathofexile.com/trade2/search/poe2/Runes%20of%20Aldur
 
-Open DevTools and grab your `POESESSID` value to set it inside a `.env` file here as you can see on the `.envExample` file:
+Open DevTools and grab your `POESESSID` 
 <img style="border-radius:50px;" src="resource/Cookie.png">
+
+Then set it inside the `.streamlit\secrets.toml` file.
+```
+POESESSID="{YOUR_SESSION_ID}"
+```
 
 **Step 2: Install Dependencies**
 
+
+Run this in CMD with the project opened:
 ```
 pip install -r requirements.txt
 ```
+*You do need to instal python in your PC in order to run this command
 
 **Step 3: Run the Script**
 
-Pass the path to your screenshot:
+Execute the Poe2-AutoValue.bat file and let the CMD Open then acess the lin in your browser.
+
+.Bat script:
 ```
-python .\main.py input\caed7c5d-0c3c-42a8-a8fe-22ad13ee8aba.png
+@echo off
+cd /d "%~dp0"
+call .\.venv\Scripts\activate.bat
+streamlit run app.py
 ```
-<img style="border-radius:50px;" src="resource/POE2-AutoSearchValue.gif">
+
+<img style="border-radius:50px;" src="resource/POE2-AutoSearchValue-V2.gif">
 
 ---
 
