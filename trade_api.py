@@ -23,7 +23,7 @@ def search_item(item_name: str) -> list[str]:
     POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
     HEADERS = get_headers()
     st.write("Secret:", POESESSID is not None)
-    
+
     url = f"https://www.pathofexile.com/api/trade2/search/poe2/{LEAGUE}"
     query = {
         "query": {
@@ -58,6 +58,8 @@ def search_item(item_name: str) -> list[str]:
         print(f"Error {r.status_code}: {r.text}")
     
     r.raise_for_status()
+    st.write(r.status_code)
+    st.write(r.text[:1000])
 
     return r.json().get("result", [])[:1]   # top 1 listings
 
