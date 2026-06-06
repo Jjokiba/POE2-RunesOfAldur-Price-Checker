@@ -11,7 +11,6 @@ from parser import parse_items
 from trade_api import get_price, get_item_data
 from output import print_results
 
-
 # Set page config
 st.set_page_config(
     page_title="POE2 Auto Search Value",
