@@ -57,7 +57,9 @@ def search_item(item_name: str) -> list[str]:
     if r.status_code != 200:
         print(f"Error {r.status_code}: {r.text}")
         print(f"{r.text[:1000]}")
-        
+        st.console(f"Error {r.status_code}: {r.text[:1000]}", color="red")
+    
+    st.console(f"Error {r.status_code}: {r.text[:1000]}", color="red")
     r.raise_for_status()
 
     return r.json().get("result", [])[:1]   # top 1 listings
