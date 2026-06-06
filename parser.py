@@ -1,3 +1,6 @@
+import streamlit as st
+
+
 def parse_items(raw_text: str) -> list[str]:
     lines = raw_text.splitlines()
     items = []
@@ -6,20 +9,20 @@ def parse_items(raw_text: str) -> list[str]:
         cleaned = line.strip()
         if cleaned:                    # skip blank lines
             items.append(cleaned)
+            st.info(f"Parsed item: {cleaned}")  # Debug: show each parsed item
 
-    items.remove("Rueshape Cowbinatidws")
     items = [
         item
         for item in items
         if (
             item.upper() not in ("IX", "1X")
             and "unique" not in item.lower()
-            and "Rueshape" not in item.lower()
-            and "Runeshape" not in item.lower()
+            and "rueshape" not in item.lower()
+            and "runeshape" not in item.lower()
         )
     ]
     items = [
-        item.replace("Ix ", "").replace("1x ", "").strip()
+        item.replace("Ix ", "").replace("1x ", "").replace("1X ", "").replace("IX ", "").strip()
         for item in items
     ]
 

@@ -46,3 +46,4 @@ htmlcov/
 *.log
 .venv
 .streamlit/secrets.toml
+.streamlit/secrets.toml
