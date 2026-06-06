@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 **Step 3: Run the Script**
 
-Execute the Poe2-AutoValue.bat file and let the CMD Open then acess the lin in your browser.
+Execute the Poe2-AutoValue.bat file and let the CMD Open then acess the link in your browser.
 
 .Bat script:
 ```
