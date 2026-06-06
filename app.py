@@ -8,7 +8,7 @@ from io import BytesIO
 from PIL import Image
 from ocr import read_image
 from parser import parse_items
-from trade_api import define_headers, get_price, get_item_data
+from trade_api import get_price, get_item_data
 from output import print_results
 
 
