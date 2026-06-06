@@ -4,6 +4,7 @@ import streamlit as st
 
 load_dotenv()
 POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
+st.write("Secret:", POESESSID is not None)
 LEAGUE    = "Runes%20of%20Aldur"   
 HEADERS   = {
     "Cookie": f"POESESSID={POESESSID}",
@@ -16,6 +17,8 @@ HEADERS   = {
 
 def search_item(item_name: str) -> list[str]:
     """Returns a list of listing IDs for a given item name."""
+    POESESSID = st.secrets.get("POESESSID")
+    st.write("Secret:", POESESSID is not None)
     url = f"https://www.pathofexile.com/api/trade2/search/poe2/{LEAGUE}"
     query = {
         "query": {
