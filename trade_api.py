@@ -2,16 +2,13 @@ import requests, os, json
 from dotenv import load_dotenv
 import streamlit as st
 
-POESESSID: str | None = "";
 LEAGUE    = "Runes%20of%20Aldur"   
-HEADERS   = "";
-
-load_dotenv()
-def define_headers():
+    
+def get_headers():
+    load_dotenv()
     POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
-    st.write("Secret:", POESESSID is not None)
-    LEAGUE    = "Runes%20of%20Aldur"   
-    HEADERS   = {
+
+    return {
         "Cookie": f"POESESSID={POESESSID}",
         "User-Agent": f"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "application/json",
@@ -20,9 +17,12 @@ def define_headers():
         "Content-Type": "application/json",
     }
 
+
 def search_item(item_name: str) -> list[str]:
     """Returns a list of listing IDs for a given item name."""
-    st.write("Secret:", POESESSID is not "")
+    POESESSID = st.secrets.get("POESESSID") or os.getenv("POESESSID")
+    HEADERS = get_headers()
+    st.write("Secret:", HEADERS is not None)
     url = f"https://www.pathofexile.com/api/trade2/search/poe2/{LEAGUE}"
     query = {
         "query": {
@@ -61,6 +61,7 @@ def search_item(item_name: str) -> list[str]:
     return r.json().get("result", [])[:1]   # top 1 listings
 
 def fetch_prices(listing_ids: list[str]) -> list[dict]:
+    HEADERS = get_headers()
     """Fetches full listing data for a list of IDs."""
     ids_str = ",".join(listing_ids)
     url = f"https://www.pathofexile.com/api/trade2/fetch/{ids_str}"
